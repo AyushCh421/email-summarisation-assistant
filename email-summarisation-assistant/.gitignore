@@ -1,0 +1,9 @@
+# Secrets - never commit your real API key
+.env
+# Local vector database and Python files
+chroma_db/
+venv/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store

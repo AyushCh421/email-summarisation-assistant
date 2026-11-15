@@ -1,0 +1,17 @@
+From: Examination Cell <exams@college.edu>
+To: All Students <students@college.edu>
+Subject: End-semester examination timetable released
+Date: Tue, 10 Nov 2026 14:00:00 +0530
+MIME-Version: 1.0
+Content-Type: text/html; charset="utf-8"
+
+<html><body>
+<p>Dear Students,</p>
+<p>The end-semester examination timetable has been published on the college portal.</p>
+<ul>
+<li>Generative AI: 1 December 2026, 10:00 AM</li>
+<li>Natural Language Processing: 3 December 2026, 10:00 AM</li>
+</ul>
+<p>Hall tickets can be downloaded from 25 November 2026. Please bring your college ID card to every exam.</p>
+<p>Examination Cell</p>
+</body></html>
