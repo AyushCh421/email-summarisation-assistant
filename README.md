@@ -1,5 +1,7 @@
 # 📧 AI Email Summarisation Assistant
 
+## Live Link : https://email-summarisation-assistant-ahmi4o8kygfazqsz7rmao7.streamlit.app/
+
 ## 1. Introduction
 A simple AI-powered assistant, built for an NLP & Generative AI lab, that reads your emails, summarises them,
 detects urgency and lets you chat with them. It combines classic **NLP text processing** (parsing, regex
