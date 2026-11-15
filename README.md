@@ -26,7 +26,7 @@ It uses plain Python only, with no LangChain.
 | Text processing | Python strings + `re` (regular expressions) |
 | Embeddings | sentence-transformers `all-MiniLM-L6-v2` (local, free) |
 | Vector store | ChromaDB (persistent, `chroma_db/` folder) |
-| LLM | Google Gemini (`gemini-2.5-flash`) via `google-genai` |
+| LLM | Google Gemini (`gemini-3.8-flash`, set with `GEMINI_MODEL` in `.env`) via `google-genai` |
 | Config | `python-dotenv` (`.env` file) |
 
 ## 4. Project Structure

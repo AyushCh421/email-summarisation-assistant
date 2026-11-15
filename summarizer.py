@@ -1,13 +1,15 @@
 """summarizer.py - Uses Google Gemini for summaries, urgency detection and answers."""
 import json
 import os
+import time
 
 from dotenv import load_dotenv
 from google import genai
-from google.genai import types
+from google.genai import errors, types
 
 load_dotenv()  # reads GEMINI_API_KEY from the .env file
-MODEL = "gemini-2.5-flash"
+MODEL = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")  # change in .env if Google retires it
+BACKUP_MODEL = "gemini-3.5-flash"  # used only when the main model is overloaded
 NOT_FOUND = "I couldn't find this information in the uploaded emails."
 
 # System prompt: sets the LLM's role, rules and safety behaviour (prompt engineering).
@@ -38,8 +40,16 @@ def ask_gemini(prompt, json_mode=False):
         temperature=0.2,  # low temperature = more factual, less creative
         response_mime_type="application/json" if json_mode else "text/plain",
     )
-    response = client.models.generate_content(model=MODEL, contents=prompt, config=config)
-    return (response.text or "").strip()
+    # If Gemini is busy (503) or rate-limited (429): wait and retry, then try the backup model.
+    attempts = [MODEL, MODEL, BACKUP_MODEL, BACKUP_MODEL]
+    for i, model in enumerate(attempts):
+        try:
+            response = client.models.generate_content(model=model, contents=prompt, config=config)
+            return (response.text or "").strip()
+        except errors.APIError as e:
+            if e.code not in (429, 503) or i == len(attempts) - 1:
+                raise
+            time.sleep(3)
 
 
 def summarize_email(mail):
